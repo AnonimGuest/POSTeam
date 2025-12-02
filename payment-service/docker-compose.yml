@@ -7,7 +7,15 @@ services:
       FLASK_ENV: development
       SKIP_DB: "1"
     ports:
-      - "12501:12501"
+      - "12501:12501"    # external access
+    expose:
+      - "12501"          # internal access
     volumes:
       - ./app:/app/app
+    networks:
+      - pos_network
     restart: unless-stopped
+
+networks:
+  pos_network:
+    external: true
